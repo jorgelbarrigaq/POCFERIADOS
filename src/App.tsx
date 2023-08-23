@@ -58,6 +58,7 @@ function App() {
                    <td> <span>{feriados.nombre}</span></td>
                 </tr>
             ))}
+            
 
       </tbody>
      </table>
