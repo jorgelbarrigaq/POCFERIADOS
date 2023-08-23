@@ -1,7 +1,7 @@
 import {useEffect,useState} from 'react'
 import axios from "axios";
 
-export function useFetch(url)
+export function useFetch(url:any)
 {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(null);
@@ -9,8 +9,8 @@ export function useFetch(url)
 
      useEffect(()=>{
 
-        setLoading(true);
-        axios.get(url,{ crossdomain: true }).then((response) => {
+        setLoading(null);
+        axios.get(url).then((response) => {
             setData(response.data);
           }).catch(error => {
             setError(error);

@@ -1,13 +1,14 @@
 
 import './App.css'
-import {useFetch}  from './hooks/services/useFetch'
+import { useFetch  } from './hooks/services/useFetch'
 
 
 function App() {
   const {data, loading, error} = useFetch(import.meta.env.VITE_PATH_API);
 
   console.log(data);
-  //console.log(error);
+  console.log(loading);
+  console.log(error);
   
   return (
     <>
