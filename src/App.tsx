@@ -28,7 +28,7 @@ function App() {
   useEffect(()=>{
     const newurl=URL + "/" + selected;
     const {} = useFetch(newurl,setData,setError);
-    console.log(data)
+    
   
 },[selected])
 
