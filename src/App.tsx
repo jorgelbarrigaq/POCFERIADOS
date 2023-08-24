@@ -16,7 +16,7 @@ function App() {
   ];
 
 
-  const URL= 'https://apis.digital.gob.cl/fl/feriados'//import.meta.env.VITE_PATH_API;
+  const URL= import.meta.env.VITE_PATH_API; //'https://apis.digital.gob.cl/fl/feriados'
   const [selected, setSelectedItem] = useState(options[1].value)
 
   const [data, setData] = useState<IFeriados[]>([]);
