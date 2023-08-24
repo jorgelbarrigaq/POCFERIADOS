@@ -1,9 +1,16 @@
+import axios from "axios";
+import {IFeriados} from './IFeriados'
 
-
-export function useFetch(url:string)
+export function useFetch(url:string,setData:any,setError:any)
 {
    
 
-    return url;
+    console.log(url);
+
+    axios.get(url).then((response) => {setData(response.data)})
+                     .catch(error => {setError(error)});
+
+                     
+    return {};
 
 }

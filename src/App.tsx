@@ -2,7 +2,10 @@
 import './App.css'
 import {IFeriados} from './hooks/services/IFeriados'
 import {useEffect,useState} from 'react'
-import axios from "axios";
+import {MyTable} from './components/MyTable'
+import {MyDropDown} from './components/MyDropDown'
+import {useFetch} from './hooks/services/useFetch'
+import MyImage from './assets/img/itau.png'
 
 
 
@@ -16,7 +19,7 @@ function App() {
   ];
 
 
-  const URL= import.meta.env.VITE_PATH_API; //'https://apis.digital.gob.cl/fl/feriados'
+  const URL= import.meta.env.VITE_PATH_API;
   const [selected, setSelectedItem] = useState(options[1].value)
 
   const [data, setData] = useState<IFeriados[]>([]);
@@ -24,44 +27,25 @@ function App() {
 
   useEffect(()=>{
     const newurl=URL + "/" + selected;
-    axios.get(newurl).then((response) => {setData(response.data)})
-                     .catch(error => {setError(error);});
-
+    const {} = useFetch(newurl,setData,setError);
+    console.log(data)
+  
 },[selected])
-
-  const handleChange = (e:any) => {
-    setSelectedItem(e.target.value);
-  }
-
 
   return (
     <div className="container-fluid">
+      <img src={MyImage} style={{width:'100px', height:'100px',position:'absolute', top:'5px' , right:'10%'}}></img>
        <h1>POC Feriados</h1>
        <br></br>
-       <div className="row"> <h4> Escoja el año para filtrar los feriados: </h4></div>
+       <div className="row"> <h4> Seleccione un año para filtrar: </h4></div>
        <div>
-       <select className="form-select" value={selected} onChange={handleChange}>
-       {options.map(option => (
-          <option key={option.key} value={option.value}>
-            {option.text}
-          </option>
-        ))}
-      </select>
+       <MyDropDown selected={selected} setSelectedItem={setSelectedItem} />
        </div>
 
      <br></br>
-     <table className="table">
-      <tbody>
-      {data.map(feriados => (
-                <tr>
-                   <td> <span>{feriados.fecha}</span></td>
-                   <td> <span>{feriados.nombre}</span></td>
-                </tr>
-            ))}
-            
 
-      </tbody>
-     </table>
+     <MyTable data={data}/>
+     
      {error && <label>Se produjo un error al llamado del servicio </label>}
     </div>
   )
